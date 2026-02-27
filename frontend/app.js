@@ -3,7 +3,7 @@
    Each turn: User bubble (right) → AI bubble (left) with audio player.
 ─────────────────────────────────────────────────────────────────────────── */
 
-const API_BASE = "http://localhost:8080";
+const API_BASE = "https://healthhub-takehome-assessment-production.up.railway.app";
 
 // ─── Conversation State ─────────────────────────────────────────────────────
 let conversationHistory = []; // [{role:"user"|"assistant", content:"..."}]
