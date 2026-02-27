@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Voice Assistant — Emotion-Aware</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="app">
+    <div class="container">
+
+      <!-- ── Header ──────────────────────────────────────── -->
+      <div class="glass header">
+        <div class="header-left">
+          <div class="header-icon">🤖</div>
+          <div>
+            <div class="header-title">AI Voice Assistant</div>
+            <div class="header-subtitle">Emotion-Aware · Context-Aware Conversation</div>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="live-badge">
+            <div class="live-dot"></div>
+            <span class="live-text">Live</span>
+          </div>
+          <div class="session-timer" id="sessionTimer">00:00</div>
+          <button class="new-chat-btn" id="newChatBtn" title="Start new conversation">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+            New
+          </button>
+          <div class="user-avatar">U</div>
+        </div>
+      </div>
+
+      <!-- ── Chat Area ────────────────────────────────────── -->
+      <div class="chat-area" id="chatArea">
+
+        <!-- Welcome (hidden once conversation starts) -->
+        <div class="welcome" id="welcomeMsg">
+          <div class="welcome-icon">🎙️</div>
+          <h2>Start Talking</h2>
+          <p>Click the mic and speak naturally. I'll detect your emotion, respond with empathy, and remember the full conversation.</p>
+          <div class="welcome-hints">
+            <div class="hint-chip" onclick="typeDemoText('I\'m feeling really stressed today')">😰 I'm stressed</div>
+            <div class="hint-chip" onclick="typeDemoText('This is so frustrating!')">😠 So frustrated</div>
+            <div class="hint-chip" onclick="typeDemoText('I\'m so happy right now!')">😊 Very happy</div>
+            <div class="hint-chip" onclick="typeDemoText('I\'m feeling a bit sad')">😢 A bit sad</div>
+          </div>
+        </div>
+
+        <!-- All conversation turns are appended here -->
+        <div id="messagesContainer"></div>
+
+      </div>
+
+      <!-- ── Pipeline Bar ──────────────────────────────────── -->
+      <div class="glass pipeline" id="pipelineBar">
+        <div class="pipe-step" id="pStep1"><div class="pipe-dot"></div><span>Speech</span></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-step" id="pStep2"><div class="pipe-dot"></div><span>Text</span></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-step" id="pStep3"><div class="pipe-dot"></div><span>Emotion</span></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-step" id="pStep4"><div class="pipe-dot"></div><span>Response</span></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-step" id="pStep5"><div class="pipe-dot"></div><span>Voice</span></div>
+      </div>
+
+      <!-- ── Input Bar ─────────────────────────────────────── -->
+      <div class="glass input-bar">
+        <button class="mic-btn" id="micBtn" title="Click to record (or press Space)">
+          <svg id="micIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z" />
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+            <line x1="12" y1="19" x2="12" y2="23" />
+            <line x1="8" y1="23" x2="16" y2="23" />
+          </svg>
+        </button>
+
+        <div class="input-field" id="inputField">
+          <span class="input-placeholder" id="inputPlaceholder">Click mic to speak — or click ✉ to type</span>
+          <canvas id="inputWaveform" width="300" height="28"></canvas>
+        </div>
+
+        <input type="text" class="text-input hidden" id="textInput"
+          placeholder="Type a message and press Enter..." />
+
+        <button class="send-btn" id="sendBtn" title="Type a message">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13" />
+            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+
+</html>
